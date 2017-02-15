@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load user_tags %}
+
+{% block content %}
+
+    <table border="1">
+        {% for object in object_list %}
+            {% if forloop.first %}
+                <tr>
+                    {% for name, value in object.get_fields %}
+                        <th>{{ name }}</th>
+                    {% endfor %}
+                    <th>BizzFuzz</th>
+                    <th>Is Allowed</th>
+                </tr>
+            {% endif %}
+            <tr>
+                {% for name, value in object.get_fields %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+                <td>{% bizzfuzz object %}</td>
+                <td>{% is_allowed object %}</td>
+                <td><a href="{% url 'user_detail' object.id %}">Details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'user_create' %}">Create</a>
+    <a href="{% url 'user_export' %}">Export</a>
+{% endblock %}

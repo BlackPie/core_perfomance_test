@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load user_tags %}
+
+{% block content %}
+    <ul>
+        {% for name, value in object.get_fields %}
+            <li>{{ name }} : {{ value}}</li>
+        {% endfor %}
+        <li>{% bizzfuzz object %}</li>
+        <li>{% is_allowed object %}</li>
+    </ul>
+    <a href="{% url 'user_update' object.id %}">change</a>
+    <a href="{% url 'user_delete' object.id %}">delete</a>
+{% endblock %}
